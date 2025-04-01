@@ -1,6 +1,9 @@
 import { Tabs } from 'expo-router';
 import { Chrome as Home, Dumbbell, Utensils, Brain, User } from 'lucide-react-native';
 
+// Eğer store/auth importu varsa, bunu kaldıralım ya da düzeltelim
+// import { ... } from '../store/auth'; şeklinde bir import varsa silelim
+
 export default function TabLayout() {
   return (
     <Tabs

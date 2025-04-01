@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Play, Clock, Flame, ChevronRight } from 'lucide-react-native';
+import { useRouter } from 'expo-router';
 
 const workoutCategories = [
   { id: 'all', name: 'Tümü' },
@@ -62,10 +63,15 @@ const workouts = [
 
 export default function FitnessScreen() {
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const router = useRouter();
 
   const filteredWorkouts = selectedCategory === 'all'
     ? workouts
     : workouts.filter(workout => workout.category === selectedCategory);
+
+  const navigateToWorkout = (workoutId: string) => {
+    router.push(`/workout/${workoutId}`);
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -75,7 +81,7 @@ export default function FitnessScreen() {
         </View>
 
         <View style={styles.featuredWorkoutContainer}>
-          <TouchableOpacity style={styles.featuredWorkout}>
+          <TouchableOpacity style={styles.featuredWorkout} onPress={() => navigateToWorkout('1')}>
             <Image
               source={{ uri: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80' }}
               style={styles.featuredWorkoutImage}
@@ -130,7 +136,11 @@ export default function FitnessScreen() {
 
         <View style={styles.workoutsContainer}>
           {filteredWorkouts.map(workout => (
-            <TouchableOpacity key={workout.id} style={styles.workoutCard}>
+            <TouchableOpacity
+              key={workout.id}
+              style={styles.workoutCard}
+              onPress={() => navigateToWorkout(workout.id)}
+            >
               <Image source={{ uri: workout.image }} style={styles.workoutImage} />
               <View style={styles.workoutContent}>
                 <View>
@@ -208,7 +218,11 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   featuredWorkoutOverlay: {
-    ...StyleSheet.absoluteFillObject,
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
     backgroundColor: 'rgba(0, 0, 0, 0.4)',
     flexDirection: 'row',
     alignItems: 'flex-end',
@@ -395,5 +409,5 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto-Regular',
     fontSize: 12,
     color: '#666666',
-  },
+  }
 });

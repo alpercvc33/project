@@ -3,17 +3,12 @@ import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useFonts, Roboto_400Regular, Roboto_500Medium, Roboto_700Bold } from '@expo-google-fonts/roboto';
 import { SplashScreen } from 'expo-router';
-import { useAuthStore } from '../store/auth'
+import { Platform } from 'react-native';
 import { useFrameworkReady } from '@/hooks/useFrameworkReady';
+import { useAuthStore } from '@/store/auth'; // @ alias kullanarak import ediyoruz
 
 // Prevent splash screen from auto-hiding
 SplashScreen.preventAutoHideAsync();
-
-declare global {
-  interface Window {
-    frameworkReady?: () => void;
-  }
-}
 
 export default function RootLayout() {
   useFrameworkReady();
@@ -26,8 +21,6 @@ export default function RootLayout() {
   const { token } = useAuthStore();
 
   useEffect(() => {
-    window.frameworkReady?.();
-    
     if (fontsLoaded || fontError) {
       SplashScreen.hideAsync();
     }

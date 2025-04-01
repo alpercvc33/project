@@ -3,10 +3,12 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from 'rea
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ChevronRight, MessageCircle, Bell, Award, TrendingUp, Brain } from 'lucide-react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useRouter } from 'expo-router';
 
 export default function HomeScreen() {
   const [greeting, setGreeting] = useState('');
   const [currentTime, setCurrentTime] = useState(new Date());
+  const router = useRouter();
 
   useEffect(() => {
     const hour = currentTime.getHours();
@@ -19,6 +21,23 @@ export default function HomeScreen() {
     }
   }, [currentTime]);
 
+  // Yönlendirme işlevleri
+  const goToChat = () => {
+    router.push('/chat');
+  };
+
+  const goToWorkout = (workoutId: string) => {
+    router.push(`/workout/${workoutId}`);
+  };
+
+  const goToMeal = (mealId: string) => {
+    router.push(`/meal/${mealId}`);
+  };
+
+  const goToSubscription = () => {
+    router.push('/subscription');
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -28,10 +47,10 @@ export default function HomeScreen() {
             <Text style={styles.userName}>Ahmet</Text>
           </View>
           <View style={styles.headerIcons}>
-            <TouchableOpacity style={styles.iconButton}>
+            <TouchableOpacity style={styles.iconButton} onPress={goToSubscription}>
               <Bell color="#333333" size={24} />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.iconButton}>
+            <TouchableOpacity style={styles.iconButton} onPress={goToChat}>
               <MessageCircle color="#333333" size={24} />
             </TouchableOpacity>
           </View>
@@ -82,7 +101,7 @@ export default function HomeScreen() {
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.recommendationsContainer}
         >
-          <TouchableOpacity style={styles.recommendationCard}>
+          <TouchableOpacity style={styles.recommendationCard} onPress={() => goToWorkout('1')}>
             <Image
               source={{ uri: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80' }}
               style={styles.recommendationImage}
@@ -93,7 +112,7 @@ export default function HomeScreen() {
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.recommendationCard}>
+          <TouchableOpacity style={styles.recommendationCard} onPress={() => goToMeal('1')}>
             <Image
               source={{ uri: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80' }}
               style={styles.recommendationImage}
@@ -120,7 +139,7 @@ export default function HomeScreen() {
           <Text style={styles.sectionTitle}>Yapay Zeka Koçunuz</Text>
         </View>
 
-        <TouchableOpacity style={styles.aiCoachCard}>
+        <TouchableOpacity style={styles.aiCoachCard} onPress={goToChat}>
           <View style={styles.aiCoachContent}>
             <View style={styles.aiCoachIconContainer}>
               <Brain color="#007AFF" size={24} />

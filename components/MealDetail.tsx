@@ -118,3 +118,100 @@ export default function MealDetail({ onClose }: MealDetailProps) {
                 <Text style={styles.stepNumberText}>3</Text>
               </View>
               <Text style={styles.stepText}>
+                Domatesi ve salatalığı küp şeklinde doğrayın. Soğanı ince dilimleyin.
+              </Text>
+            </View>
+            <View style={styles.stepItem}>
+              <View style={styles.stepNumber}>
+                <Text style={styles.stepNumberText}>4</Text>
+              </View>
+              <Text style={styles.stepText}>
+                Pişen tavukları ve doğranmış sebzeleri yeşilliklerin üzerine ekleyin.
+              </Text>
+            </View>
+            <View style={styles.stepItem}>
+              <View style={styles.stepNumber}>
+                <Text style={styles.stepNumberText}>5</Text>
+              </View>
+              <Text style={styles.stepText}>
+                Zeytinyağı ve limon suyunu karıştırıp, tuz ve karabiber ekleyerek sos hazırlayın.
+              </Text>
+            </View>
+            <View style={styles.stepItem}>
+              <View style={styles.stepNumber}>
+                <Text style={styles.stepNumberText}>6</Text>
+              </View>
+              <Text style={styles.stepText}>
+                Sosu salatanın üzerine gezdirin ve servis edin.
+              </Text>
+            </View>
+          </View>
+
+          <Text style={styles.sectionTitle}>Beslenme İpuçları</Text>
+          <Text style={styles.tipText}>
+            • Daha fazla protein için salataya haşlanmış yumurta ekleyebilirsiniz.{'\n'}
+            • Karbonhidrat miktarını artırmak istiyorsanız, salataya kinoa veya bulgur ekleyebilirsiniz.{'\n'}
+            • Vegan alternatif olarak tavuk yerine nohut veya tofu kullanabilirsiniz.{'\n'}
+            • Gluten hassasiyetiniz varsa, tüm malzemelerin glutensiz olduğundan emin olun.
+          </Text>
+        </View>
+      </ScrollView>
+
+      <View style={styles.footer}>
+        <TouchableOpacity style={styles.addButton}>
+          <Text style={styles.addButtonText}>Günlük Planıma Ekle</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#FFFFFF',
+  },
+  imageContainer: {
+    height: 300,
+    position: 'relative',
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+  },
+  backButton: {
+    position: 'absolute',
+    top: 16,
+    left: 16,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 10,
+  },
+  imageOverlay: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.4)',
+    padding: 20,
+  },
+  mealInfo: {},
+  mealCategory: {
+    fontFamily: 'Roboto-Medium',
+    fontSize: 14,
+    color: '#FFFFFF',
+    opacity: 0.9,
+    marginBottom: 4,
+  },
+  mealTitle: {
+    fontFamily: 'Roboto-Bold',
+    fontSize: 24,
+    color: '#FFFFFF',
+    marginBottom: 8,
+  },
+  mealDetails: {
+    flexDirection: 'row',

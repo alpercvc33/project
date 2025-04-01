@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Clock, ChevronRight, Plus } from 'lucide-react-native';
+import { useRouter } from 'expo-router';
 
 const mealCategories = [
   { id: 'all', name: 'Tümü' },
@@ -71,10 +72,15 @@ const meals = [
 
 export default function NutritionScreen() {
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const router = useRouter();
 
   const filteredMeals = selectedCategory === 'all'
     ? meals
     : meals.filter(meal => meal.category === selectedCategory);
+    
+  const navigateToMeal = (mealId: string) => {
+    router.push(`/meal/${mealId}`);
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -147,7 +153,11 @@ export default function NutritionScreen() {
 
         <View style={styles.mealsContainer}>
           {filteredMeals.map(meal => (
-            <TouchableOpacity key={meal.id} style={styles.mealCard}>
+            <TouchableOpacity 
+              key={meal.id} 
+              style={styles.mealCard}
+              onPress={() => navigateToMeal(meal.id)}
+            >
               <Image source={{ uri: meal.image }} style={styles.mealImage} />
               <View style={styles.mealContent}>
                 <Text style={styles.mealTitle}>{meal.title}</Text>
